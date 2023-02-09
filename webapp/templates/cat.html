@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <title>Cat</title>
+</head>
+<body>
+
+
+<div class="info" style="display: flex">
+  <form action="cat" method="post">
+      {% csrf_token %}
+
+      <img src="static/images/{{photo}}" alt="cat" style="height: 250px; width:auto">
+
+      <br/><br/>
+
+      <select name="action">
+          {% for act in menus %}
+            <option value="{{ act.id }}"> {{ act.title }} </option>
+         {% endfor %}
+      </select><br/><br/>
+      <input type="submit">
+  </form>
+<div style="display: inline-block; inline-items: top; padding-left: 10px">
+    <p>Кот - {{ name }}</p>
+    <p>Возраст - {{ age }}
+      {% if age > 4 %}
+        <span> лет</span>
+      {% else %}
+        <span> года </span>
+      {% endif %}
+    </p>
+    <p>Уровень счастья - {{ happiness }}</p>
+    <p>Уровень сытости - {{ satiety }}</p>
+    <p>Занятие кота - {{ state }}</p>
+    {% if period > 0 %}
+        <p>период менее: {{ period }} секунд</p>
+    {% endif %}
+    </div>
+</div>
+</body>
+
+</html>
+
